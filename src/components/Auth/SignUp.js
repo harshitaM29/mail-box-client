@@ -1,14 +1,17 @@
 import { Button, Form } from "react-bootstrap";
 import classes from './SignUp.module.css'
 import { useRef, useState } from "react";
+import { useHistory } from 'react-router-dom'
 
-const SignUp = (props) => {
+const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
-
+    const history = useHistory();
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const confirmPasswordInputRef = useRef();
-
+    const switchAuthModeHandler = () => {
+      history.push('/')
+  }
     const submitHandler = (e) => {
         e.preventDefault();
         const enteredEmail = emailInputRef.current.value;
@@ -36,6 +39,7 @@ const SignUp = (props) => {
         }).then(res => {
           setIsLoading(false);
           if(res.ok) {
+            history.push('/')
            console.log('user created sucessfully')
           } else{
             res.json().then(data => {
@@ -65,7 +69,12 @@ return(
     <div className={classes.actions}>
     {isLoading && <p>Sending Request...</p>}
     {!isLoading && <Button type="submit">Create Account</Button>}
-    <Button className={classes.toggle}>Login with existing account</Button>
+    <button 
+    className={classes.toggle}
+    type='button'
+    onClick={switchAuthModeHandler}
+    >
+      Login with existing account</button>
     </div>
   </Form>
   </section>

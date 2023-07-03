@@ -1,10 +1,21 @@
-import { Button } from "react-bootstrap";
+import { Route, Switch} from 'react-router-dom'
 import SignUp from "./components/Auth/SignUp";
-
+import SignIn from './components/Auth/SignIn';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
-   <SignUp />
+   <Switch>
+    <Route path='/' exact>
+      <SignIn />
+    </Route>
+    <Route path='/signup'>
+      <SignUp />
+    </Route>
+    <Route path='/home'>
+      <HomePage />
+    </Route>
+   </Switch>
   );
 }
 
