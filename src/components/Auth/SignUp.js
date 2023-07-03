@@ -51,7 +51,7 @@ return(
     <h2>Sign Up</h2>
     <Form onSubmit={submitHandler}>
     <Form.Group className={classes.control} controlId="formGroupEmail">
-      <Form.Label>Email address</Form.Label>
+      <Form.Label>Email</Form.Label>
       <Form.Control type="email" placeholder="Enter email" ref={emailInputRef} required/>
     </Form.Group>
     <Form.Group className={classes.control} controlId="formGroupPassword">
