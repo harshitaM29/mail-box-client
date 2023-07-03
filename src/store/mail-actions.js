@@ -3,17 +3,39 @@ import { mailActions } from "./mail";
 const email = localStorage.getItem('email');
 const emailId = email.split('@')[0];
 
+
+export const receivedMail = () => {
+    return async(dispatch) => {
+        const fetchData = async() => {
+            const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mail${emailId}.json`);
+            if(!response.ok) {
+                throw new Error('Could not fetch data')
+            };
+            const data = await response.json();
+            return data;
+        }
+
+            try {
+             const mailData = await fetchData();
+             dispatch(mailActions.replaceMail({
+                mail: mailData.mail || [],
+             }))
+            } catch (error) {
+                console.log(error)
+            
+        };
+    };
+}
+
 export const sendMail = (mailInput) => {
    
     return async() => {
        
-            const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com//mail${emailId}.json`,{
+           
+            const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mail${emailId}.json`,{
                 method: 'PUT',
                 body:JSON.stringify({
-                    from:mailInput.from,
-                    to:mailInput.to,
-                    subject:mailInput.subject,
-                    text:mailInput.text
+                  mail:mailInput.mail
 
                 })
             })

@@ -1,36 +1,43 @@
 import { Container, Row, Col, Button, ListGroup, Nav, Offcanvas} from 'react-bootstrap';
 import classes from './MailOptions.module.css';
-import Inbox from './Inbox';
-import MailEditor from './MailEditor';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
-const MailOptions = () => {
-    const [isClicked, setIsClicked] = useState(false)
+
+const MailOptions = (props) => {
+    
+   const history = useHistory();
     const handleClick = () => {
-        setIsClicked(true);
+        history.replace('/edit')
     }
     return (
         <Container className={classes.mailOptions}>
+        <div>
         <Button onClick={handleClick}>Compose</Button>
-             <Row className={classes.optionRow}>  
-        <Col className={classes.options}>
-        <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
-            activeKey="/home"
+        </div>
+       <div className={classes.optionRow}>
+
+      
+        <Nav className="col-md-10 d-none d-md-block bg-light sidebar"
             // onSelect={selectedKey => alert(`selected ${selectedKey}`)}
             >
             <Nav.Item>
-                <Nav.Link>Inbox</Nav.Link>
+                <Nav.Link><NavLink to='/inbox' style={ ({ 
+                       textDecoration: 'none',})}>Inbox</NavLink></Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="link-1">Sent</Nav.Link>
+                <Nav.Link>
+                    <NavLink to='/sent'style={ ({ 
+                       textDecoration: 'none',})}>Sent</NavLink></Nav.Link>
             </Nav.Item>
             </Nav>
-    </Col>  
-    {!isClicked && <Col md={10}><Inbox /></Col>  }
-    {isClicked && <Col md={10}><MailEditor /></Col>  }
+           
+
+        </div>
+    
  
-  </Row> 
         </Container>
     )
 };

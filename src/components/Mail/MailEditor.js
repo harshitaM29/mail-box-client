@@ -3,13 +3,16 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Form, Row, Col, Button, Modal } from "react-bootstrap";
 import classes from './MailEditor.module.css'
 import { useState } from "react";
+import { mailActions } from "../../store/mail";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const MailEditor = () => {
     const [enteredEmail, setEnteredEmail] = useState('');
     const [enteredSubject, setEnteredSubject] = useState('');
     const [enteredText, setEnteredText] = useState('');
-
+    const dispatch = useDispatch();
+    const emailId= localStorage.getItem("email")
     const updateEmail= (e) => {
         setEnteredEmail(e.target.value);
     }
@@ -17,21 +20,23 @@ const MailEditor = () => {
         setEnteredSubject(e.target.value)
     }
     const updateText = (e) => {
-        setEnteredText(e.target.value)
+    e.blocks.forEach((item) =>setEnteredText(item.text)
+    )
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
         const mailInput = {
+            from:emailId,
             to:enteredEmail,
             subject:enteredSubject,
             text:enteredText
         };
-        console.log(mailInput)
+        dispatch(mailActions.sent(mailInput))
     }
         return (
-    <div  style={{ display: 'block', position: 'initial' }}>
+    <div  className={classes.form} style={{ display: 'block', position: 'initial' }}>
         
-    <Form onSubmit={formSubmitHandler}>
+    <Form onSubmit={formSubmitHandler} >
          <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
         <Form.Label column sm={1}>
           To:
@@ -45,19 +50,19 @@ const MailEditor = () => {
           Subject:
         </Form.Label>
         <Col sm={10}>
-          <Form.Control type="email" value={enteredSubject} onChange={updateSubject}/>
+          <Form.Control type="text" value={enteredSubject} onChange={updateSubject}/>
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail" >
         <Col sm={10} style={{height:'20rem'}}>
         <Editor
-         editorState={enteredText}
+         value={enteredText}
        
          toolbarClassName="toolbarClassName"
          wrapperClassName="wrapperClassName"
          editorClassName="editorClassName"
          style={{innerHeight:'2rem'}}
-            onEditorStateChange={updateText}
+            onChange={updateText}
          />
         </Col>
       </Form.Group>

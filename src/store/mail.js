@@ -6,6 +6,10 @@ const mailSlice = createSlice({
     name:'mail',
     initialState:initialMailState,
     reducers:{
+        replaceMail(state,action) {
+            state.mail = action.payload.mail;
+          
+        },
         sent(state, action) {
             state.mail.push({
                 ...action.payload

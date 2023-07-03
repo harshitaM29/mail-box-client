@@ -1,7 +1,10 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Nav, Col, Row, Container, } from "react-bootstrap";
+import MailOptions from "./MailOptions";
 const Inbox = () => {
 return(
-    <Card style={{ width: '70rem', height:'auto'}}>
+  
+
+  <Card style={{ width: '70rem', height:'auto'}}>
     <Card.Img variant="top" />
     <Card.Body>
       <Card.Title>Card Title</Card.Title>
@@ -12,6 +15,8 @@ return(
       <Button variant="primary">Go somewhere</Button>
     </Card.Body>
   </Card>
+
+    
 )
 
 };

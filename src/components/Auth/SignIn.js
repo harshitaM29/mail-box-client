@@ -36,7 +36,7 @@ const SignIn = props => {
           if(res.ok) {
             res.json().then(data => {
                 dispatch(authActions.login(data))
-              history.replace('/home')
+              history.replace('/inbox')
               
             });
            
