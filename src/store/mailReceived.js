@@ -10,6 +10,11 @@ const mailReceivedSlice = createSlice({
             state.receivedMail = action.payload.mail;
 
         },
+        editReceivedMail(state,action) {
+            console.log(action.payload)
+            const index =  state.receivedMail.findIndex(item => item.id === action.payload.id)
+            state.receivedMail[index].isRead = true
+        } 
         }
     
 });

@@ -1,17 +1,15 @@
 import { Card, Button, Nav, Col, Row, Container, ListGroup, } from "react-bootstrap";
 import { useSelector  } from "react-redux";
-const Inbox = () => {
+import InboxDetails from "./InboxDetails";
+const Inbox = (props) => {
   const receivedMail = useSelector(state => state.mailReceive.receivedMail)
 return(
+  <li>
+  <InboxDetails key={props.id} id={props.id} to={props.to} from={props.from} subject={props.subject} text={props.text}
+  isRead={props.isRead}/>
   
-
-<Container style={{marginTop:'1rem'}}>   
-       <ListGroup>
-       {receivedMail.map((item) => <ListGroup.Item>From:{item.from} {item.text}</ListGroup.Item> )}
-       </ListGroup>
-       </Container>     
-
-    
+</li>
+      
 )
 
 };

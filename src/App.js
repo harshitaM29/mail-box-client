@@ -6,7 +6,7 @@ import { sendMail, receivedMail } from './store/mail-actions';
 import { useSelector,useDispatch } from 'react-redux';
 import { Fragment, useEffect } from 'react';
 import SentMail from './components/Mail/SentMail';
-import Inbox from './components/Mail/Inbox';
+import InboxList from './components/Mail/InboxList';
 import MainLayout from './components/Layout/MainLayout';
 import MailEditor from './components/Mail/MailEditor';
 import { sendToReceiver, fetchReceivedMails } from './store/mail-received-actions';
@@ -56,7 +56,7 @@ function App() {
     <MailEditor />
   </Route>
   <Route path='/inbox'>
-    <Inbox />
+    <InboxList />
   </Route>
   </MainLayout> }
    </Switch>

@@ -1,0 +1,15 @@
+.list {
+   
+    /* width: 90%;
+    max-width: 40rem;
+    background-color: rgb(135, 125, 125); */
+}
+  .list ul {
+    list-style: none;
+    padding: 1rem;
+  }
+  .list li {
+    border-bottom: 1px solid black;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+  }

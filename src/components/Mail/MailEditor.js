@@ -27,10 +27,12 @@ const MailEditor = () => {
     const formSubmitHandler = (e) => {
         e.preventDefault();
         const mailInput = {
+            id:Math.random().toString(),
             from:emailId,
             to:enteredEmail,
             subject:enteredSubject,
-            text:enteredText
+            text:enteredText,
+            isRead:false
         };
         dispatch(mailActions.sent(mailInput))
     }

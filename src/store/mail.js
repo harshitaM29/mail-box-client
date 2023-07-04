@@ -14,7 +14,8 @@ const mailSlice = createSlice({
             state.mail.push({
                 ...action.payload
             })
-        }
+        },
+        
     }
 })
 
