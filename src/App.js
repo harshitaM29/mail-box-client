@@ -9,23 +9,32 @@ import SentMail from './components/Mail/SentMail';
 import Inbox from './components/Mail/Inbox';
 import MainLayout from './components/Layout/MainLayout';
 import MailEditor from './components/Mail/MailEditor';
+import { sendToReceiver, fetchReceivedMails } from './store/mail-received-actions';
 
 let isInitial = true;
 function App() {
   const dispatch = useDispatch();
   const mails = useSelector(state => state.mail)
   const isLogin = useSelector(state => state.auth.isLoggedIn)
+  const receiveMail = useSelector(state => state.mailReceive)
+  console.log(receiveMail)
   useEffect(() => {
+    if(isLogin) {
     dispatch(receivedMail())
-  },[receivedMail])
+    dispatch(fetchReceivedMails())
+    }
+  },[receivedMail,fetchReceivedMails])
   useEffect(() => {
     if(isInitial) {
       isInitial = false;
       return;
     }
+    if(isLogin) {
     dispatch(sendMail(mails))
-    
-  },[mails,dispatch])
+    dispatch(sendToReceiver(mails))
+    }
+  },[mails,receiveMail,dispatch])
+
   return (
     <Fragment>
   

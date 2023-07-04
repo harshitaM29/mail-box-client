@@ -1,0 +1,6 @@
+.button {
+    background: teal;
+}
+.button:hover {
+    background: rgb(2, 70, 70);
+}

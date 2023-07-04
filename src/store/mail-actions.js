@@ -1,13 +1,15 @@
 import { mailActions } from "./mail";
+import { useSelector  } from "react-redux";
 
 const email = localStorage.getItem('email');
-const emailId = email.split('@')[0];
+
 
 
 export const receivedMail = () => {
     return async(dispatch) => {
         const fetchData = async() => {
-            const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mail${emailId}.json`);
+            const emailId = email.split('@')[0];
+            const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mailSent${emailId}.json`);
             if(!response.ok) {
                 throw new Error('Could not fetch data')
             };
@@ -31,8 +33,8 @@ export const sendMail = (mailInput) => {
    
     return async() => {
        
-           
-            const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mail${emailId}.json`,{
+        const emailId = email.split('@')[0];
+            const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mailSent${emailId}.json`,{
                 method: 'PUT',
                 body:JSON.stringify({
                   mail:mailInput.mail

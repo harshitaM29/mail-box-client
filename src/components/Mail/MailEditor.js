@@ -4,6 +4,7 @@ import { Form, Row, Col, Button, Modal } from "react-bootstrap";
 import classes from './MailEditor.module.css'
 import { useState } from "react";
 import { mailActions } from "../../store/mail";
+import { mailReceivedActions } from "../../store/mailReceived";
 import { useSelector, useDispatch } from 'react-redux';
 
 

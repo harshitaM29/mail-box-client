@@ -1,20 +1,15 @@
-import { Card, Button, Nav, Col, Row, Container, } from "react-bootstrap";
-import MailOptions from "./MailOptions";
+import { Card, Button, Nav, Col, Row, Container, ListGroup, } from "react-bootstrap";
+import { useSelector  } from "react-redux";
 const Inbox = () => {
+  const receivedMail = useSelector(state => state.mailReceive.receivedMail)
 return(
   
 
-  <Card style={{ width: '70rem', height:'auto'}}>
-    <Card.Img variant="top" />
-    <Card.Body>
-      <Card.Title>Card Title</Card.Title>
-      <Card.Text>
-        Some quick example text to build on the card title and make up the
-        bulk of the card's content.
-      </Card.Text>
-      <Button variant="primary">Go somewhere</Button>
-    </Card.Body>
-  </Card>
+<Container style={{marginTop:'1rem'}}>   
+       <ListGroup>
+       {receivedMail.map((item) => <ListGroup.Item>From:{item.from} {item.text}</ListGroup.Item> )}
+       </ListGroup>
+       </Container>     
 
     
 )
