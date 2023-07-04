@@ -9,7 +9,10 @@ import SentMail from './components/Mail/SentMail';
 import InboxList from './components/Mail/InboxList';
 import MainLayout from './components/Layout/MainLayout';
 import MailEditor from './components/Mail/MailEditor';
-import { sendToReceiver, fetchReceivedMails } from './store/mail-received-actions';
+import { sendToReceiver, fetchReceivedMails, receivedMails } from './store/mail-received-actions';
+import { mailReadAction } from './store/mailRead';
+import { mailActions } from './store/mail';
+import ViewMail from './components/Inbox/ViewMail';
 
 let isInitial = true;
 function App() {
@@ -17,13 +20,18 @@ function App() {
   const mails = useSelector(state => state.mail)
   const isLogin = useSelector(state => state.auth.isLoggedIn)
   const receiveMail = useSelector(state => state.mailReceive)
-  console.log(receiveMail)
+  const count = useSelector(state => state.mailReceive.count)
+  
   useEffect(() => {
     if(isLogin) {
     dispatch(receivedMail())
     dispatch(fetchReceivedMails())
+    dispatch(mailReadAction.increaseCount(count))
     }
   },[receivedMail,fetchReceivedMails])
+useEffect(() => {
+ dispatch(receivedMails(receiveMail))
+},[receiveMail,dispatch])
   useEffect(() => {
     if(isInitial) {
       isInitial = false;
@@ -58,6 +66,9 @@ function App() {
   <Route path='/inbox'>
     <InboxList />
   </Route>
+  <Route path='/viewmail'>
+    <ViewMail />
+    </Route>
   </MainLayout> }
    </Switch>
   

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useSelector  } from "react-redux";
 
 const mailReadSlice = createSlice({
     name:'mailRead',
@@ -8,9 +9,12 @@ const mailReadSlice = createSlice({
     },
     reducers : {
         increaseCount(state,action) {
-            state.count++
+            state.count = action.payload
+        },
+        decreaseCount(state) {
+            state.count--;
         }
-        
+
     }
 });
 

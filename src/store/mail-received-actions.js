@@ -27,12 +27,32 @@ return async(dispatch) => {
 
 }
 
+export const receivedMails = (mailInput) => {
+    // console.log(mailInput)
+    const email = localStorage.getItem('email');
+const emailId = email.split('@')[0];
+return async() => {
+
+    const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mailReceive${emailId}.json`,{
+        method: 'PUT',
+        body:JSON.stringify({
+          mail:mailInput.receivedMail
+
+        })
+    })
+    if(!response.ok) {
+        throw new Error('Request failed');
+    }
+  
+}
+}
+
 export const sendToReceiver = (mailInput) => {
    
     let email = '';
     mailInput.mail.forEach((item) => email = item.to.split('@')[0])
     return async() => {
-       
+
         const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mailReceive${email}.json`,{
             method: 'PUT',
             body:JSON.stringify({

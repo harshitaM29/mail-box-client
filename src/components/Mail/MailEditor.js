@@ -35,6 +35,7 @@ const MailEditor = () => {
             isRead:false
         };
         dispatch(mailActions.sent(mailInput))
+        
     }
         return (
     <div  className={classes.form} style={{ display: 'block', position: 'initial' }}>

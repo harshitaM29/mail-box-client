@@ -1,9 +1,9 @@
-import { Container, Row, Col, Button, ListGroup, Nav, Offcanvas} from 'react-bootstrap';
+import { Container, Row, Col, Button, ListGroup, Nav, Offcanvas, Badge} from 'react-bootstrap';
 import classes from './MailOptions.module.css';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
-
+import { useSelector } from 'react-redux';
 
 
 const MailOptions = (props) => {
@@ -12,6 +12,14 @@ const MailOptions = (props) => {
     const handleClick = () => {
         history.replace('/edit')
     }
+    const count = useSelector(state => state.mailReceive.receivedMail)
+    let c = 0;
+  count.forEach(item => {
+    if(item.isRead === false) {
+        c++;
+    }
+  })
+console.log(c)
     return (
         <Container className={classes.mailOptions}>
         <div>
@@ -25,7 +33,7 @@ const MailOptions = (props) => {
             >
             <Nav.Item>
                 <Nav.Link><NavLink to='/inbox' style={ ({ 
-                       textDecoration: 'none',})}>Inbox</NavLink></Nav.Link>
+                       textDecoration: 'none',})}>Inbox <Badge bg="secondary">{c}</Badge></NavLink></Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link>

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialMailState = {sent:false, mail:[]}
+const initialMailState = {mail:[]}
 
 const mailSlice = createSlice({
     name:'mail',
@@ -15,6 +15,7 @@ const mailSlice = createSlice({
                 ...action.payload
             })
         },
+      
         
     }
 })
