@@ -35,6 +35,7 @@ const MailEditor = () => {
             isRead:false
         };
         dispatch(mailActions.sent(mailInput))
+        dispatch(mailReceivedActions.addToRecivedMail(mailInput))
         
     }
         return (

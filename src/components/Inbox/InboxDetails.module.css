@@ -48,13 +48,15 @@
     text-align: right;
    
   }
-/* .action {
+.action {
   text-align: right;
+  margin-bottom: 2rem;
 }
 .action button {
+
   font: inherit;
   cursor: pointer;
-    margin-right: 1rem;
+ 
    background-color: teal;
    border:1px solid teal;
     border-radius: 20px;
@@ -67,7 +69,7 @@
   background-color: rgb(5, 72, 72);
   border-color: rgb(5, 72, 72);
   ;
-} */
+}
 /* .action {
     height: 0;
     width: 0;

@@ -12,7 +12,7 @@ const MailOptions = (props) => {
     const handleClick = () => {
         history.replace('/edit')
     }
-    const count = useSelector(state => state.mailReceive.receivedMail)
+    const count = useSelector(state => state.mailReceive.receivedFromSender)
     let c = 0;
   count.forEach(item => {
     if(item.isRead === false) {

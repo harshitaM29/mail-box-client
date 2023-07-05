@@ -14,19 +14,23 @@ const InboxDetails = props=> {
         history.replace({pathname:'/viewmail',params:props})
        
     }
+    const deleteHandler = () => {
+        dispatch(mailReceivedActions.deleteReceivedMails(props.id))
+    }
     return (
 
         <Fragment>
         
        
-        <div className={classes.description} style={{fontWeight:!props.isRead ? 'bold' : 'normal'}} onClick={listClickHandler}>
+        <div className={classes.description} style={{fontWeight:!props.isRead ? 'bold' : 'normal'}}>
         {!props.isRead && <button></button> }
-         <p>{props.from}</p>
+         <p  onClick={listClickHandler}>{props.from}</p>
             <p>{props.subject}</p>
             
             <p >{props.text}</p>
-           
-          
+        <div className={classes.action}>
+        <button onClick={deleteHandler}>Delete</button> 
+        </div>  
         </div>
        
 

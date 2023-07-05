@@ -36,7 +36,7 @@ return async() => {
     const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mailReceive${emailId}.json`,{
         method: 'PUT',
         body:JSON.stringify({
-          mail:mailInput.receivedMail
+          mail:mailInput.receivedFromSender
 
         })
     })
@@ -50,13 +50,13 @@ return async() => {
 export const sendToReceiver = (mailInput) => {
    
     let email = '';
-    mailInput.mail.forEach((item) => email = item.to.split('@')[0])
+    mailInput.receivedMail.forEach((item) => email = item.to.split('@')[0])
     return async() => {
 
         const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mailReceive${email}.json`,{
             method: 'PUT',
             body:JSON.stringify({
-              mail:mailInput.mail
+              mail:mailInput.receivedMail
 
             })
         })

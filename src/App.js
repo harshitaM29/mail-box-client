@@ -20,8 +20,9 @@ function App() {
   const mails = useSelector(state => state.mail)
   const isLogin = useSelector(state => state.auth.isLoggedIn)
   const receiveMail = useSelector(state => state.mailReceive)
+
   const count = useSelector(state => state.mailReceive.count)
-  
+  console.log(receiveMail)
   useEffect(() => {
     if(isLogin) {
     dispatch(receivedMail())
@@ -31,6 +32,7 @@ function App() {
   },[receivedMail,fetchReceivedMails])
 useEffect(() => {
  dispatch(receivedMails(receiveMail))
+
 },[receiveMail,dispatch])
   useEffect(() => {
     if(isInitial) {
@@ -39,7 +41,8 @@ useEffect(() => {
     }
     if(isLogin) {
     dispatch(sendMail(mails))
-    dispatch(sendToReceiver(mails))
+    // dispatch(receivedMails(mails))
+    dispatch(sendToReceiver(receiveMail))
     }
   },[mails,receiveMail,dispatch])
 
