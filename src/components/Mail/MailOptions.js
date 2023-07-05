@@ -1,6 +1,5 @@
-import { Container, Row, Col, Button, ListGroup, Nav, Offcanvas, Badge} from 'react-bootstrap';
+import { Container, Button, Nav, Badge} from 'react-bootstrap';
 import classes from './MailOptions.module.css';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux';

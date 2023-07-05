@@ -1,12 +1,11 @@
 import { Card, Container } from "react-bootstrap";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 
-const ViewMail = () => {
-  const location = useLocation();
- const data = location.params || []
- 
+const ViewSentMail = () => {
+    const location = useLocation();
+    const data = location.params || []
     return (
-    <Container  style={{marginTop:'1rem'}}>
+        <Container  style={{marginTop:'1rem'}}>
         <div>{data.subject}</div>
         <Card>
             <Card.Body>To:{data.to.split('@')[0]}</Card.Body>
@@ -14,7 +13,6 @@ const ViewMail = () => {
         </Card>
         </Container>
     )
-
 };
 
-export default ViewMail
+export default ViewSentMail;

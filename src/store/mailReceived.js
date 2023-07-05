@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { receivedMail } from './mail-actions';
 
 const initialMailReceivedState = {receivedMail:[],receivedFromSender:[],count:0}
 

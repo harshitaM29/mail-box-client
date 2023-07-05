@@ -1,9 +1,7 @@
-import { Badge } from 'react-bootstrap';
 import classes from './InboxDetails.module.css'
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { mailReceivedActions } from '../../store/mailReceived';
-import { mailActions } from '../../store/mail';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 const InboxDetails = props=> {
     

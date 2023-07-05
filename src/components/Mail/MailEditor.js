@@ -1,18 +1,19 @@
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { Form, Row, Col, Button, Modal } from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
 import classes from './MailEditor.module.css'
 import { useState } from "react";
 import { mailActions } from "../../store/mail";
 import { mailReceivedActions } from "../../store/mailReceived";
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 
 const MailEditor = () => {
     const [enteredEmail, setEnteredEmail] = useState('');
     const [enteredSubject, setEnteredSubject] = useState('');
     const [enteredText, setEnteredText] = useState('');
     const dispatch = useDispatch();
+    const history = useHistory();
     const emailId= localStorage.getItem("email")
     const updateEmail= (e) => {
         setEnteredEmail(e.target.value);
@@ -36,7 +37,7 @@ const MailEditor = () => {
         };
         dispatch(mailActions.sent(mailInput))
         dispatch(mailReceivedActions.addToRecivedMail(mailInput))
-        
+        history.push('/inbox')
     }
         return (
     <div  className={classes.form} style={{ display: 'block', position: 'initial' }}>
