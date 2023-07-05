@@ -5,11 +5,13 @@ import HomePage from './pages/HomePage';
 import { sendMail, receivedMail } from './store/mail-actions';
 import { useSelector,useDispatch } from 'react-redux';
 import { Fragment, useEffect } from 'react';
-import SentMail from './components/Mail/SentMailList';
 import InboxList from './components/Mail/InboxList';
+import SentMailList from './components/Mail/SentMailList';
 import MainLayout from './components/Layout/MainLayout';
 import MailEditor from './components/Mail/MailEditor';
 import { sendToReceiver, fetchReceivedMails, receivedMails } from './store/mail-received-actions';
+import { mailReadAction } from './store/mailRead';
+import { mailActions } from './store/mail';
 import ViewMail from './components/Inbox/ViewMail';
 import ViewSentMail from './components/SentMail/ViewSentMail';
 
@@ -19,20 +21,18 @@ function App() {
   const mails = useSelector(state => state.mail)
   const isLogin = useSelector(state => state.auth.isLoggedIn)
   const receiveMail = useSelector(state => state.mailReceive)
-
+  const count = useSelector(state => state.mailReceive.count)
   
   useEffect(() => {
     if(isLogin) {
     dispatch(receivedMail())
     dispatch(fetchReceivedMails())
+    dispatch(mailReadAction.increaseCount(count))
     }
-  },[ dispatch, isLogin])
-
+  },[receivedMail,fetchReceivedMails])
 useEffect(() => {
  dispatch(receivedMails(receiveMail))
-
 },[receiveMail,dispatch])
-
   useEffect(() => {
     if(isInitial) {
       isInitial = false;
@@ -42,7 +42,7 @@ useEffect(() => {
     dispatch(sendMail(mails))
     dispatch(sendToReceiver(receiveMail))
     }
-  },[mails,receiveMail,dispatch, isLogin])
+  },[mails,receiveMail,dispatch])
 
   return (
     <Fragment>
@@ -59,7 +59,7 @@ useEffect(() => {
       <HomePage />
     </Route>
   <Route path='/sent'>
-    <SentMail />
+    <SentMailList />
   </Route>
   <Route path='/edit'>
     <MailEditor />
