@@ -5,6 +5,7 @@ import Inbox from "../Inbox/Inbox";
 import classes from './InboxList.module.css'
 const InboxList = () => {
   const receivedMail = useSelector(state => state.mailReceive.receivedFromSender)
+  console.log(receivedMail)
 return(
   
 

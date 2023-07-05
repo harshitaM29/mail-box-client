@@ -4,6 +4,7 @@ import classes from './InboxList.module.css';
 import SentMail from "../SentMail/SentMail";
 const SentMailList = () => {
     const mails = useSelector(state => state.mail.mail)
+    console.log(mails)
     return(
       <Card style={{marginTop:'1rem'}}  className={classes.list}>   
        <ul>

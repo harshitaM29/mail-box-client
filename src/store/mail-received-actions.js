@@ -3,7 +3,11 @@ import { mailReceivedActions } from "./mailReceived";
 
 export const fetchReceivedMails = () => {
     const email = localStorage.getItem('email');
-const emailId = email.split('@')[0];
+    let emailId = '';
+   if(email !== null) {
+    emailId = email.split('@')[0];
+   }
+
 return async(dispatch) => {
     const fetchData = async() => {
         const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mailReceive${emailId}.json`);
@@ -16,8 +20,9 @@ return async(dispatch) => {
 
         try {
          const mailData = await fetchData();
+         console.log(mailData)
          dispatch(mailReceivedActions.replaceRecivedMail({
-            mail: mailData.mail || [],
+            receivedMail: mailData.mail || [],
          }))
         } catch (error) {
             console.log(error)
@@ -28,9 +33,11 @@ return async(dispatch) => {
 }
 
 export const receivedMails = (mailInput) => {
-    // console.log(mailInput)
     const email = localStorage.getItem('email');
-const emailId = email.split('@')[0];
+    let emailId = '';
+    if(email !== null) {
+        emailId = email.split('@')[0];
+    }
 return async() => {
 
     const response = await fetch(`https://mail-box-client-8e62b-default-rtdb.firebaseio.com/mailReceive${emailId}.json`,{

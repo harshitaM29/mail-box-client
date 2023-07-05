@@ -18,7 +18,7 @@ const MailOptions = (props) => {
         c++;
     }
   })
-console.log(c)
+
     return (
         <Container className={classes.mailOptions}>
         <div>

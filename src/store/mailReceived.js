@@ -7,7 +7,7 @@ const mailReceivedSlice = createSlice({
     initialState:initialMailReceivedState,
     reducers : {
         replaceRecivedMail(state,action) {
-            state.receivedFromSender = action.payload.mail;
+            state.receivedFromSender = action.payload.receivedMail;
             state.count = state.receivedFromSender.length
 
         },
@@ -17,7 +17,6 @@ const mailReceivedSlice = createSlice({
             })
         },
         editReceivedMail(state,action) {
-            // console.log(state.receivedMail)
             const index =  state.receivedFromSender.findIndex(item => item.id === action.payload.id)
             state.receivedFromSender[index].isRead = true
             state.count--;
